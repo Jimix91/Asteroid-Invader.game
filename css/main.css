@@ -1,33 +1,37 @@
-body{
-    background-image: url(../Assets/SetAssets2/background_stars.png);
-    margin: 0;
-    background-size: cover;       
-    background-position: center; 
-    background-repeat: no-repeat; 
-    
+body {
+  background-image: url(../Assets/SetAssets2/background_stars.png);
+  margin: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
 }
 
-#game{
-    
-    width: 100vw;
-    height: 100vh;
-    overflow:hidden;
-    position: relative;
+#game {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
 }
 
-#player{
-    background-image: url(../Assets/SetAssets2/ship_1.png);
-    position: absolute;
-    background-size: cover;       
-    background-position: center;  
-    background-repeat: no-repeat; 
+#player {
+    background-color: brown;
+  position: absolute;
+  background-image: url(../Assets/SetAssets2/ship_1.png);
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
-.obstacle {
+.Meteor {
     
-    background-image: url(../Assets/SetAssets2/meteor.png);
-    position: absolute;
+  background-color: brown;
+  position: absolute;
+  background-image: url(../Assets/SetAssets2/meteor.png);
+  background-size: contain;
+  background-repeat: no-repeat;
 }
+
+
 #page-gameover {
     text-align: center;
     background-color: blanchedalmond;

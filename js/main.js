@@ -1,125 +1,139 @@
+const game = document.getElementById("game");
+const gameWidth = game.clientWidth;
+const gameHeight = game.clientHeight;
+
 class Player {
-    constructor() {
-        this.width = 5;
-        this.height = 10;
-        this.positionX = 50 - this.width/2;
-        this.positionY = 0;
+  constructor() {
+    this.width = 60;   
+    this.height = 80;  
+    this.positionX = gameWidth / 2 - this.width / 2;
+    this.positionY = 20;
 
-         this.updateUI()
+    this.updateUI();
+  }
+
+  updateUI() {
+    const playerELM = document.getElementById("player");
+    playerELM.style.width = this.width + "px";
+    playerELM.style.height = this.height + "px";
+    playerELM.style.left = this.positionX + "px";
+    playerELM.style.bottom = this.positionY + "px";
+  }
+
+  moveLeft() {
+    if (this.positionX > 0) {
+      this.positionX -= 10;
+      this.updateUI();
     }
-    updateUI (){
+  }
 
-        const playerELM = document.getElementById("player")
-        playerELM.style.width = this.width + "vw"
-        playerELM.style.height = this.height + "vh"
-        playerELM.style.bottom = this.positionY + "vh"
-        playerELM.style.left  =this.positionX + "vw"
-
-
+  moveRight() {
+    if (this.positionX < gameWidth - this.width) {
+      this.positionX += 10;
+      this.updateUI();
     }
-        
-    moveLeft() {
-        if(this.positionX > 0) {
-            this.positionX--;
-            this.updateUI()
-        }
-       
+  }
+
+  moveForward() {
+    if (this.positionY < gameHeight - this.height) {
+      this.positionY += 10;
+      this.updateUI();
     }
-    moveRight() {
-        if(this.positionX < 100 - this.width)
-        this.positionX++
-        this.updateUI()
+  }
+
+  moveBackwards() {
+    if (this.positionY > 0) {
+      this.positionY -= 10;
+      this.updateUI();
     }
-    moveForward(){
-        if(this.positionY < 100 - this.height)
-        this.positionY++
-        this.updateUI()
-   
-    }
-    moveBackwards(){
-        if(this.positionY > 0)
-        this.positionY--
-        this.updateUI()
-
-    }
-
-
-
-}  
-
-class Obstacle{
-    constructor() {
-        this.width = 50;
-        this.height = 100;
-        this.positionX = Math.floor(Math.random() * (100 - this.width + 1))
-        this.positionY = 100;
-        this.obstacleELM = null
-
-        this.createObstacle()
-        this.updateUI()
-        
-    } 
-    createObstacle(){
-        this.obstacleELM = document.createElement("div")
-        this.obstacleELM.className = "obstacle"
-        
-        const  parentELM = document.getElementById("board")
-        parentELM.appendChild(this.obstacleELM)
-    }
-
-    updateUI(){
-
-       
-        this.obstacleELM.style.width = this.width + "vw"
-        this.obstacleELM.style.height = this.height + "vh"
-        this.obstacleELM.style.bottom = this.positionY + "vh"
-        this.obstacleELM.style.left  =this.positionX + "vw"
-
-    }
-   
-    moveDown(){
-        this.positionY--
-        this.updateUI()
-    }
+  }
 }
 
 
-const player = new Player()
-let obstaclesArr = []
 
-setInterval(()=>{
-    const newobstacle = new Obstacle()
-    obstaclesArr.push(newobstacle)
-}, 5000)
+
+  
+
+class Meteor {
+  constructor() {
+    this.width = 150;   
+    this.height = 150;  
+    this.positionX = Math.random() * (gameWidth - this.width);
+    this.positionY = gameHeight;
+    this.MeteorELM = null;
+
+    this.createMeteor();
+    this.updateUI();
+  }
+
+  createMeteor() {
+    this.MeteorELM = document.createElement("div");
+    this.MeteorELM.className = "Meteor";
+    game.appendChild(this.MeteorELM);
+  }
+
+  updateUI() {
+    this.MeteorELM.style.width = this.width + "px";
+    this.MeteorELM.style.height = this.height + "px";
+    this.MeteorELM.style.left = this.positionX + "px";
+    this.MeteorELM.style.bottom = this.positionY + "px";
+  }
+
+  moveDown() {
+    this.positionY -= 4;
+    this.updateUI();
+  }
+}
+
+
+
+const player = new Player();
+let MeteorsArr = [];
 
 setInterval(() => {
-    obstaclesArr.forEach(obstacleInstance => {
-        obstacleInstance.moveDown()
+  const newMeteor = new Meteor();
+  MeteorsArr.push(newMeteor);
+}, 2000);
 
-         if (
-            player.positionX < obstacleInstance.positionX + obstacleInstance.width &&
-            player.positionX + player.width > obstacleInstance.positionX &&
-            player.positionY < obstacleInstance.positionY + obstacleInstance.height &&
-            player.positionY + player.height > obstacleInstance.positionY
-         ){
-            console.log("game over my fren!!");
-            location.href = "gameover.html"
-         }
-    })
-   
-}, 100);
+setInterval(() => {
+  MeteorsArr.forEach((MeteorInstance, index) => {
+    MeteorInstance.moveDown();
 
+    
+    if (MeteorInstance.positionY + MeteorInstance.height < 0) {
+      MeteorInstance.MeteorELM.remove();
+      MeteorsArr.splice(index, 1);
+    }
+    if (
+      player.positionX < MeteorInstance.positionX + MeteorInstance.width &&
+      player.positionX + player.width > MeteorInstance.positionX &&
+      player.positionY < MeteorInstance.positionY + MeteorInstance.height &&
+      player.positionY + player.height > MeteorInstance.positionY
+    ) {
+      console.log("game over my fren!!");
+      location.href = "gameover.html";
+    }
+  });
+}, 50);
 
-document.addEventListener('keydown', (e) => {
-  if (e.code === 'ArrowLeft') {
-    player.moveLeft()
-  } else if (e.code === 'ArrowRight') {
-    player.moveRight()
+document.addEventListener("keydown", (e) => {
+  if (
+    e.code === "ArrowUp" ||
+    e.code === "ArrowDown" ||
+    e.code === "ArrowLeft" ||
+    e.code === "ArrowRight"
+  ) {
+    e.preventDefault();
   }
-  else if (e.code ==='ArrowUp'){
-    player.moveForward()
-  }
-  else if (e.code ==='ArrowDown')
-    player.moveBackwards()
+
+  if (e.code === "ArrowLeft")
+     player.moveLeft();
+  else if (e.code === "ArrowRight") 
+    player.moveRight();
+  else if (e.code === "ArrowUp") 
+    player.moveForward();
+  else if (e.code === "ArrowDown")
+     player.moveBackwards();
 });
+
 
