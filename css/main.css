@@ -1,26 +1,41 @@
 body{
-    background-color: blanchedalmond;
+    background-image: url(../Assets/SetAssets2/background_stars.png);
     margin: 0;
+    background-size: cover;       
+    background-position: center; 
+    background-repeat: no-repeat; 
+    
 }
-#board{
+
+#game{
     
     width: 100vw;
     height: 100vh;
-
+    overflow:hidden;
     position: relative;
 }
 
 #player{
-    background-color: rgb(222, 56, 164);
-
+    background-image: url(../Assets/SetAssets2/ship_1.png);
     position: absolute;
+    background-size: cover;       
+    background-position: center;  
+    background-repeat: no-repeat; 
 }
 
 .obstacle {
-    background-color: rgb(110, 28, 110);
+    
+    background-image: url(../Assets/SetAssets2/meteor.png);
     position: absolute;
 }
 #page-gameover {
     text-align: center;
     background-color: blanchedalmond;
+}
+
+.bullet {
+  width: 6px;
+  height: 12px;
+  background: yellow;
+  position: absolute;
 }

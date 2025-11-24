@@ -1,11 +1,13 @@
 class Player {
     constructor() {
-        this.width = 10;
-        this.height = 5;
+        this.width = 5;
+        this.height = 10;
         this.positionX = 50 - this.width/2;
         this.positionY = 0;
+
+         this.updateUI()
     }
-    updateUIplayer (){
+    updateUI (){
 
         const playerELM = document.getElementById("player")
         playerELM.style.width = this.width + "vw"
@@ -19,27 +21,42 @@ class Player {
     moveLeft() {
         if(this.positionX > 0) {
             this.positionX--;
-            this.updateUIplayer()
+            this.updateUI()
         }
        
     }
     moveRight() {
         if(this.positionX < 100 - this.width)
         this.positionX++
-        this.updateUIplayer()
+        this.updateUI()
     }
-}
+    moveForward(){
+        if(this.positionY < 100 - this.height)
+        this.positionY++
+        this.updateUI()
+   
+    }
+    moveBackwards(){
+        if(this.positionY > 0)
+        this.positionY--
+        this.updateUI()
+
+    }
+
+
+
+}  
 
 class Obstacle{
     constructor() {
-        this.width = 10;
-        this.height = 20;
+        this.width = 50;
+        this.height = 100;
         this.positionX = Math.floor(Math.random() * (100 - this.width + 1))
         this.positionY = 100;
         this.obstacleELM = null
 
         this.createObstacle()
-        this.updateUIobstacle()
+        this.updateUI()
         
     } 
     createObstacle(){
@@ -50,7 +67,7 @@ class Obstacle{
         parentELM.appendChild(this.obstacleELM)
     }
 
-    updateUIobstacle (){
+    updateUI(){
 
        
         this.obstacleELM.style.width = this.width + "vw"
@@ -60,9 +77,9 @@ class Obstacle{
 
     }
    
-    movedown(){
+    moveDown(){
         this.positionY--
-        this.updateUIobstacle()
+        this.updateUI()
     }
 }
 
@@ -77,7 +94,7 @@ setInterval(()=>{
 
 setInterval(() => {
     obstaclesArr.forEach(obstacleInstance => {
-        obstacleInstance.movedown()
+        obstacleInstance.moveDown()
 
          if (
             player.positionX < obstacleInstance.positionX + obstacleInstance.width &&
@@ -99,5 +116,10 @@ document.addEventListener('keydown', (e) => {
   } else if (e.code === 'ArrowRight') {
     player.moveRight()
   }
+  else if (e.code ==='ArrowUp'){
+    player.moveForward()
+  }
+  else if (e.code ==='ArrowDown')
+    player.moveBackwards()
 });
 
