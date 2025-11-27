@@ -384,7 +384,7 @@ setInterval(() => {
           if (explosion) explosion.remove();
   }, 400);
 
-        meteor.health -= 1; // RESTA VIDA
+        meteor.health -= 1; // RESTA VIDA AL METEORITO
 
         if (meteor.health <= 0) {
           meteor.MeteorELM.remove();
@@ -518,7 +518,7 @@ function isCollision(objA, objB) {
 }
 
 //dificultat
-let meteorSpawnInterval = 8000; // intervalo inicial de aparición (ms)
+let meteorSpawnInterval = 8000; // intervalo inicial de aparición 
 let lastMeteorSpawn = Date.now();
 
 function adjustDifficulty() {

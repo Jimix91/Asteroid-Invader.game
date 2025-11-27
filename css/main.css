@@ -188,14 +188,55 @@ body {
   left: 50%;
   transform: translateX(-50%);
 }
+#planet-health-text {
+    position: absolute;
+    top: 50%;
+    left: -30%;
+    transform: translate(-50%, -50%); /* centers the text */
+    font-family: 'Press Start 2P', monospace;
+    font-size: 12px;
+    color: #00eaff;
+    pointer-events: none; /* lets clicks pass through */
+    text-shadow: 0 0 4px #000; /* makes it visible on the green bar */
+    border: 2px solid #00eaff;
+    border-radius: 10px;
+    padding: 10px 20px;
+}
 
-#score{
-  position: absolute;
-  top: 20px; 
-  left: 20px;
-  color: white; 
-  font-size: 2em;
-  z-index: 1000
+.score-container {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(4px);
+
+    border: 2px solid #00eaff;
+    border-radius: 10px;
+
+    font-family: 'Press Start 2P', monospace;
+    font-size: 30px;
+    color: #00eaff;
+    text-transform: uppercase;
+
+    text-shadow: 0 0 6px #00eaff, 0 0 15px #00aaff;
+    box-shadow: 0 0 12px #00eaff inset, 0 0 15px #00eaff;
+
+    animation: pulseGlow 2s infinite ease-in-out;
+}
+
+/* Animación de brillo */
+@keyframes pulseGlow {
+    0% {
+        box-shadow: 0 0 6px #00eaff inset, 0 0 10px #00eaff;
+    }
+    50% {
+        box-shadow: 0 0 12px #00eaff inset, 0 0 22px #00eaff;
+    }
+    100% {
+        box-shadow: 0 0 6px #00eaff inset, 0 0 10px #00eaff;
+    }
 }
 #planet-health-container {
   position: absolute;
