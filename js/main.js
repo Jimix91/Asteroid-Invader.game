@@ -12,9 +12,23 @@ if (document.body.id === "page-intro") {
     });
   });
 }
+ //instrucciones de juego
+window.addEventListener('load', () => {
+  const instructionBox = document.getElementById('instruction-box');
 
+  instructionBox.style.display = 'block';
+  
+  let gameActive = false;
 
-
+  setTimeout(() => {
+    instructionBox.style.display = 'none';
+    gameActive = true;
+  }, 10000);
+})
+//sonidos y audio
+const shootSound = new Audio("./Assets/audio/laser-gun-shot-sound-future-sci-fi-lazer-wobble-chakongaudio-174883.mp3");
+shootSound.volume = 0.8;      
+shootSound.preload = "auto";
 
 const game = document.getElementById("game");
 const gameWidth = game.clientWidth;
@@ -288,6 +302,9 @@ document.addEventListener("keydown", (e) => {
     e.preventDefault();
   }
   if (e.code === "Space") {
+    shootSound.currentTime = 0;
+    shootSound.play();
+    
     const bullet = new Shooting();
     bullet.createShoot();
     shootArr.push(bullet);
