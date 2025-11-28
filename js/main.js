@@ -31,12 +31,18 @@ shootSound.volume = 0.5;
 shootSound.preload = "auto";
 
 const hitSound = new Audio("./Assets/audio/SE-Explosion3-C.ogg"); // reemplaza con la ruta de tu sonido
-hitSound.volume = 0.9;
+hitSound.volume = 1;
 hitSound.preload = "auto";
 
 const hitGroundSound = new Audio("./Assets/audio/SE-Explosion3-D.ogg")
 hitSound.volume = 0.9;
 hitSound.preload = "auto";
+
+const musicIndex = document.getElementById("music-index");
+musicIndex.volume = 0.4; 
+
+
+
 
 const game = document.getElementById("game");
 const gameWidth = game.clientWidth;
